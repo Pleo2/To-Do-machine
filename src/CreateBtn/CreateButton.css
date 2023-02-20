@@ -1,0 +1,34 @@
+@import './../global.css';
+
+.container-button {
+  margin-top: 2rem ;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 30px;
+
+  border-radius: 0.75rem;
+  box-shadow: 00 0 0 1px rgb(209 213 219); 
+  /* border: 1px solid ; */
+  padding-inline: 10px;
+  padding-block: 3px;
+
+  transition: var(--transition-time);
+}
+
+.container-button:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0 1px var(--accents-6);
+}
+
+.container-button svg {
+  width: 15px;
+  height: 15px;
+  padding-right: 2px;
+  color: var(--accents-5);
+}
+
+.container-button span {
+  color: var(--accents-5);
+}

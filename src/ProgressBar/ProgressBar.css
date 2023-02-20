@@ -1,0 +1,35 @@
+@import './../global.css';
+
+.ProgressRoot {
+  /* margin-top: 2rem; */
+  position: relative;
+  /* overflow: hidden; */
+  background: var(--accents-2);
+  overflow: hidden;
+  border-radius: 15px;
+  width: 300px;
+  height: 25px;
+
+  /* Fix overflow clipping in Safari */
+  /* https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0 */
+  transform: translateZ(0);
+  animation: 2s loading  ;
+}
+
+@keyframes loading {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+
+}
+
+.ProgressIndicator {
+  background-color: var(--accents-6) ;
+  width: 100%;
+  height: 100%;
+  /* border-radius: 15px; */
+  transition: transform 1s cubic-bezier(0.65, 0, 0.35, 1);
+}
