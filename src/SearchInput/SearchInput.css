@@ -28,7 +28,7 @@ input::placeholder {
   color: var(--accents-3);
   /* box-shadow Color === border-Gray-300 Tailwind */
   box-shadow: 00 0 0 1px rgb(209 213 219); 
-
+  
   transition: var(--transition-time);
 }
 

@@ -1,52 +1,72 @@
-import React from "react";
-import { TodoCounter } from '../Counter'
-import { SearchInput } from '../SearchInput'
-import { ListItems } from "../ListItems";
-import { Item } from "../Item";
-import { CreateTodoButton } from "../CreateBtn";
-import { ProgressBar } from "../ProgressBar";
+/* eslint-disable react/jsx-no-undef */
+/* eslint-disable react/jsx-filename-extension */
+/* eslint-disable react/prop-types */
+import React from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { TodoContext } from '../TodoContext';
+import Header from '../Header';
+import TodoCounter from '../Counter';
+import SearchInput from '../SearchInput';
+import ListItems from '../ListItems';
+import Item from '../Item';
+import CreateTodoButton from '../CreateBtn';
+import ProgressBar from '../ProgressBar';
+import Modal from '../Modal';
 
-export const AppUI = ({
-      completedTodos,
-      totalTodos,
-      searchValue,
-      setSearchValue,
-      searchTodos,
-      completeOrUncompleteTodo,
-      deleteTodo,
-}) => {
+export default function AppUI() {
+  const {
+    error,
+    loading,
+    searchTodos,
+    completeOrUncompleteTodo,
+    deleteTodo,
+    openModal,
+  } = React.useContext(TodoContext);
+
   return (
     <>
-      <TodoCounter 
-        completed={completedTodos}
-        total={totalTodos}
-      />
+      <Header />
+      <TodoCounter />
+      <ProgressBar />
 
-      <ProgressBar 
-        completed={completedTodos}
-        total={totalTodos}
-      />
+      <SearchInput />
 
-      <SearchInput 
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      />
+      <ListItems>
+        {error && (
+          <p style={{ color: 'red', margin: 'auto', textAlign: 'center' }}>
+            error
+          </p>
+        )}
+        {loading && (
+          <p style={{ color: 'gray', margin: 'auto', textAlign: 'center' }}>
+            loading...
+          </p>
+        )}
+        {!loading && !searchTodos.length && (
+          <CreateTodoButton advice="Create First To-do" />
+        )}
+        {searchTodos.length && <CreateTodoButton advice="Add To-do" />}
 
-      <CreateTodoButton/>
-      <ListItems>  
-        {/* cuando se hace un recorrido se debe enviar la propiedad "key" dentro del componente de una lista  */}
-        {searchTodos.map((todo) => {
-          return (
-            <Item 
-              key={todo.itemId} 
-              text={todo.text} 
-              completed={todo.completed}
-              onComplete={() => completeOrUncompleteTodo(todo.text)}
-              onDelete={() => deleteTodo(todo.text)}
-            />
-          );
-        })}
+        {searchTodos.map((todo, index) => (
+          <Item
+            index={index}
+            key={todo.text}
+            text={todo.text}
+            completed={todo.completed}
+            onComplete={() => completeOrUncompleteTodo(todo.text)}
+            onDelete={() => deleteTodo(todo.text)}
+          />
+        ))}
       </ListItems>
+      <AnimatePresence>
+        {!!openModal && (
+          <Modal
+            title="Create a new To-do"
+            leftBtn="cancel"
+            rightBt2="add"
+          />
+        )}
+      </AnimatePresence>
     </>
   );
 }

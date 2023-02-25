@@ -1,7 +1,6 @@
 @import './../global.css';
 
 .container-button {
-  margin-top: 2rem ;
   position: relative;
   display: flex;
   align-items: center;

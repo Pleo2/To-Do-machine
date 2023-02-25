@@ -23,9 +23,9 @@ body {
   background: rgb(238, 238, 238);
   background: linear-gradient(
     110deg,
-    #eef2ff 0%,
+    #e5ebfd 0%,
     rgba(255, 255, 255, 1) 10%,
     rgba(255, 255, 255, 1) 60%,
-    #cffafe 100%
+    #fff6ff 100%
   );
 }

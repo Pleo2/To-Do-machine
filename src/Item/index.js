@@ -1,65 +1,73 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { ReactComponent as TrashSVG } from "../Icons/trash.svg";
-import { ReactComponent as CircleSVG } from "../Icons/check-circle.svg";
-import "./Item.css";
+/* eslint-disable react/prop-types */
+/* eslint-disable react/jsx-filename-extension */
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ReactComponent as TrashSVG } from '../Icons/trash.svg';
+import { ReactComponent as CircleSVG } from '../Icons/check-circle.svg';
+import './Item.css';
 
 const variants = {
   hidden: {
-    opacity:0,
-    y:-15
+    opacity: 0,
+    y: -15,
   },
-  visible: (indexTodo )=> ({
-    opacity:1,
-    y:0,
+  visible: (indexTodo) => ({
+    opacity: 1,
+    y: 0,
     transition: {
-      duration: 0.80,
-      delay: (indexTodo + 1) * 0.2,
-    }
+      duration: 0.3,
+      delay: (indexTodo + 0.5) * 0.05,
+    },
   }),
-  exit:{
-    opacity:0,
+  exit: {
+    opacity: 0,
     x: -400,
-    transition:{
-      duration: 0.40
-    }
-  }
-}
+    transition: {
+      duration: 0.2,
+    },
+  },
+};
 
-let logoId = () => Math.floor(Math.random() * 1000);
+const logoId = () => Math.floor(Math.random() * 1000);
 
-export const Item = (props) => {
+export default function Item({
+  completed,
+  id,
+  index,
+  text,
+  onComplete,
+  onDelete,
+}) {
   return (
-    // si props.complete se realiza un condicional el cual si es true crea la clase 'icon-check--icon'
     <motion.li
-      className={`container-item ${props.completed && "icon-check--icon"}`}
-      key={props.id}
+      className={`container-item ${completed && 'icon-check--icon'}`}
+      key={id}
       variants={variants}
-      custom={props.index}
-      layoutId={props.text}
-      initial='hidden'
-      animate='visible'
-      exit='exit'
+      custom={index}
+      layoutId={text}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
     >
       <motion.span
-        whileHover={{ scale: 1.05}}
-        whileTap={{ scale: 0.95}}
-        className='circleSVG'
-        onClick={() => props.onComplete()}
-        >
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="circleSVG"
+        onClick={onComplete}
+      >
         <CircleSVG key={logoId()} />
       </motion.span>
 
-      <p>{props.text}</p>
+      <p>{text}</p>
 
       <motion.span
-        whileHover={{ scale: 1.05}}
-        whileTap={{ scale: 0.95}}
-        className={`trashSVG`}
-        onClick={() => props.onDelete()}
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
+        className="trashSVG"
+        onClick={onDelete}
       >
         <TrashSVG key={logoId()} />
       </motion.span>
     </motion.li>
   );
-};
+}
