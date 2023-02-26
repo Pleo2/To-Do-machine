@@ -1,16 +1,13 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-filename-extension */
-import React, { useContext } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { ReactComponent as PlusSVG } from '../Icons/plus.svg';
 import './CreateButton.css';
-import { TodoContext } from '../TodoContext';
 
 // eslint-disable-next-line react/prop-types
-export default function CreateTodoButton({ advice }) {
-  const { openModal, setOpenModal } = useContext(TodoContext);
-
+export default function CreateTodoButton({ advice, openModal, setOpenModal }) {
   const onClickButton = () => {
     setOpenModal(!openModal);
   };

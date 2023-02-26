@@ -2,13 +2,12 @@
 /* eslint-disable react/destructuring-assignment */
 /* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable react/jsx-filename-extension */
+// eslint-disable-next-line no-unused-vars
 import React, { useState } from 'react';
-import useLocalStorage from './useLocalStorage';
-import useSearchValue from './useSearchValue';
+import useLocalStorage from './customsHooks/useLocalStorage';
+import useSearchValue from './customsHooks/useSearchValue';
 
-const TodoContext = React.createContext();
-
-function TodoProvider(props) {
+export default function useTodo() {
   const {
     item: todos,
     saveItem: saveTodos,
@@ -54,26 +53,18 @@ function TodoProvider(props) {
     saveTodos(newTodos);
   };
 
-  return (
-    <TodoContext.Provider
-      value={{
-        completedTodos,
-        totalTodos,
-        searchValue,
-        setSearchValue,
-        searchTodos,
-        completeOrUncompleteTodo,
-        deleteTodo,
-        loading,
-        error,
-        openModal,
-        setOpenModal,
-        addTodo,
-      }}
-    >
-      {props.children}
-    </TodoContext.Provider>
-  );
+  return {
+    completedTodos,
+    totalTodos,
+    searchValue,
+    setSearchValue,
+    searchTodos,
+    completeOrUncompleteTodo,
+    deleteTodo,
+    loading,
+    error,
+    openModal,
+    setOpenModal,
+    addTodo,
+  };
 }
-
-export { TodoProvider, TodoContext };

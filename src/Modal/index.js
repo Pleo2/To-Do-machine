@@ -5,11 +5,16 @@ import React, { useContext } from 'react';
 import ReactDOM from 'react-dom';
 import { motion } from 'framer-motion';
 import './Modal.css';
-import { TodoContext } from '../TodoContext';
 
-export default function Modal({ title, leftBtn, rightBt2 }) {
+export default function Modal({
+  title,
+  leftBtn,
+  rightBt2,
+  openModal,
+  setOpenModal,
+  addTodo,
+}) {
   const [newTodoValue, setNewTodoValue] = React.useState('');
-  const { openModal, setOpenModal, addTodo } = useContext(TodoContext);
 
   const onAddsubmit = (event) => {
     event.preventDefault();
