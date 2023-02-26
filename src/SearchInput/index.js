@@ -4,11 +4,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import * as Label from '@radix-ui/react-label';
 import './SearchInput.css';
-import { TodoContext } from '../TodoContext';
 
-export default function SearchInput() {
-  const { setSearchValue } = React.useContext(TodoContext);
-
+export default function SearchInput({ setSearchValue }) {
   const onSearchValueChange = (event) => {
     setSearchValue(event.target.value);
   };

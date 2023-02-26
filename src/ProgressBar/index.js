@@ -3,7 +3,6 @@
 import React from 'react';
 import './ProgressBar.css';
 import * as Progress from '@radix-ui/react-progress';
-import { TodoContext } from '../TodoContext';
 
 // Utils
 const calPorcentaje = (t, c) => {
@@ -11,9 +10,7 @@ const calPorcentaje = (t, c) => {
   return Math.round(P);
 };
 
-export default function ProgressBar() {
-  const { completedTodos, totalTodos } = React.useContext(TodoContext);
-
+export default function ProgressBar({ completedTodos, totalTodos }) {
   const progressPorcentaje = calPorcentaje(totalTodos, completedTodos);
 
   const [progress, setProgress] = React.useState(0);

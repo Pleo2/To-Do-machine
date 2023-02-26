@@ -2,8 +2,9 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ReactComponent as TrashSVG } from '../Icons/trash.svg';
-import { ReactComponent as CircleSVG } from '../Icons/check-circle.svg';
+import CircleSVG from '../Icons/Circle';
+import CheckCircleSVG from '../Icons/Check-circle';
+import TrashSVG from '../Icons/Trash';
 import './Item.css';
 
 const variants = {
@@ -55,7 +56,8 @@ export default function Item({
         className="circleSVG"
         onClick={onComplete}
       >
-        <CircleSVG key={logoId()} />
+        {!completed && <CircleSVG width="16" height="16" /> }
+        {completed && <CheckCircleSVG width="16" height="16" /> }
       </motion.span>
 
       <p>{text}</p>

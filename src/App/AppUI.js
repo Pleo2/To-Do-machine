@@ -6,11 +6,11 @@ import { AnimatePresence } from 'framer-motion';
 import { TodoContext } from '../TodoContext';
 import Header from '../Header';
 import TodoCounter from '../Counter';
+import ProgressBar from '../ProgressBar';
 import SearchInput from '../SearchInput';
 import ListItems from '../ListItems';
-import Item from '../Item';
 import CreateTodoButton from '../CreateBtn';
-import ProgressBar from '../ProgressBar';
+import Item from '../Item';
 import Modal from '../Modal';
 
 export default function AppUI() {
@@ -18,18 +18,30 @@ export default function AppUI() {
     error,
     loading,
     searchTodos,
+    setSearchValue,
     completeOrUncompleteTodo,
     deleteTodo,
     openModal,
+    completedTodos,
+    totalTodos,
   } = React.useContext(TodoContext);
 
   return (
     <>
       <Header />
-      <TodoCounter />
-      <ProgressBar />
 
-      <SearchInput />
+      <TodoCounter
+        completedTodos={completedTodos}
+        totalTodos={totalTodos}
+      />
+      <ProgressBar
+        completedTodos={completedTodos}
+        totalTodos={totalTodos}
+      />
+
+      <SearchInput
+        setSearchValue={setSearchValue}
+      />
 
       <ListItems>
         {error && (
@@ -58,6 +70,7 @@ export default function AppUI() {
           />
         ))}
       </ListItems>
+
       <AnimatePresence>
         {!!openModal && (
           <Modal
