@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import * as Label from '@radix-ui/react-label';
 import './SearchInput.css';
 
-export default function SearchInput({ setSearchValue }) {
+export default function SearchInput({ setSearchValue, loading }) {
   const onSearchValueChange = (event) => {
     setSearchValue(event.target.value);
   };
@@ -36,6 +36,7 @@ export default function SearchInput({ setSearchValue }) {
         defaultValue=""
         placeholder="Search To-Do's"
         onChange={onSearchValueChange}
+        disabled={loading === true}
       />
     </motion.div>
   );

@@ -35,3 +35,7 @@ input::placeholder {
 .Input:focus {
   box-shadow: 0 0 0 1px var(--accents-7);
 }
+
+.Input:disabled {
+  opacity: 0.25;
+}

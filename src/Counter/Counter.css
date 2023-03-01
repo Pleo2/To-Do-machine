@@ -8,6 +8,11 @@
   font-weight: 700;
   background: black;
   background: linear-gradient(169deg, rgb(37, 37, 37) 0%, rgb(150, 150, 150) 100%);
-  -webkit-background-clip: text;
-  color: transparent;  
+  background-clip: text;
+  color: transparent;
+  transition: color 2s;
+}
+
+.title--loading{ 
+  color: #a8a8a8;
 }

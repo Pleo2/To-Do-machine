@@ -38,7 +38,7 @@ export default function Modal({
         className="ModalBackground"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.3, delay: 0.1 }}
+        transition={{ duration: 0.2, delay: 0.15 }}
         exit={{ opacity: 0 }}
       />
       <motion.div className="ModalContainer">
@@ -46,7 +46,7 @@ export default function Modal({
           className="ModalContainerInput"
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3 }}
+          transition={{ duration: 0.2 }}
           exit={{ opacity: 0, scale: 0 }}
         >
           <h3>{title}</h3>

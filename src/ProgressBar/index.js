@@ -10,7 +10,7 @@ const calPorcentaje = (t, c) => {
   return Math.round(P);
 };
 
-export default function ProgressBar({ completedTodos, totalTodos }) {
+export default function ProgressBar({ completedTodos, totalTodos, loading }) {
   const progressPorcentaje = calPorcentaje(totalTodos, completedTodos);
 
   const [progress, setProgress] = React.useState(0);
@@ -22,7 +22,7 @@ export default function ProgressBar({ completedTodos, totalTodos }) {
 
   return (
     <Progress.Root
-      className="ProgressRoot"
+      className={`ProgressRoot ${loading === true && 'ProgressRoot--loading'}`}
       value={66}
     >
       <Progress.Indicator

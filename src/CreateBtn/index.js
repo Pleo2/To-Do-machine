@@ -3,7 +3,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ReactComponent as PlusSVG } from '../Icons/plus.svg';
+import PlusSVG from '../Icons/Plus';
 import './CreateButton.css';
 
 // eslint-disable-next-line react/prop-types
@@ -18,9 +18,12 @@ export default function CreateTodoButton({ advice, openModal, setOpenModal }) {
       onClick={onClickButton}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.4, delay: 0.3 }}
+      transition={{ duration: 0.4, delay: 0.1 }}
     >
-      <PlusSVG />
+      <PlusSVG
+        width="15"
+        height="15"
+      />
       <span>
         {advice}
       </span>

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unstable-nested-components */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
@@ -8,14 +9,19 @@ import ProgressBar from '../ProgressBar';
 import SearchInput from '../SearchInput';
 import ListItems from '../ListItems';
 import CreateTodoButton from '../CreateBtn';
+import ErrorTodo from '../ErrorTodo';
+import LoadingTodo from '../LoadingTodo';
 import Item from '../Item';
 import Modal from '../Modal';
+import EmptySearchValue from '../EmptySearchValue';
+import { ChangeAlertWithStorageListener } from '../ChangeAlert.js';
 
 export default function App() {
   const {
     error,
     loading,
     searchTodos,
+    searchValue,
     setSearchValue,
     completeOrUncompleteTodo,
     deleteTodo,
@@ -24,6 +30,7 @@ export default function App() {
     completedTodos,
     totalTodos,
     addTodo,
+    syncTodos,
   } = useTodo();
 
   return (
@@ -33,35 +40,53 @@ export default function App() {
       <TodoCounter
         completedTodos={completedTodos}
         totalTodos={totalTodos}
+        loading={loading}
       />
       <ProgressBar
         completedTodos={completedTodos}
         totalTodos={totalTodos}
+        loading={loading}
       />
 
-      <SearchInput setSearchValue={setSearchValue} />
+      <SearchInput
+        setSearchValue={setSearchValue}
+        loading={loading}
+      />
 
-      <ListItems>
-        {error && (
-          <p style={{ color: 'red', margin: 'auto', textAlign: 'center' }}>
-            error
-          </p>
-        )}
-        {loading && (
-          <p style={{ color: 'gray', margin: 'auto', textAlign: 'center' }}>
-            loading...
-          </p>
-        )}
-        {!loading && !searchTodos.length && (
+      <ChangeAlertWithStorageListener syncTodos={syncTodos} />
+      <ListItems
+        error={error}
+        loading={loading}
+        searchTodos={searchTodos}
+        totalTodos={totalTodos}
+        searchValue={searchValue}
+        onError={() => <ErrorTodo />}
+        onLoading={() => <LoadingTodo />}
+        onEmptyTodo={() => (
           <CreateTodoButton
             advice="Create First To-do"
             openModal={openModal}
             setOpenModal={setOpenModal}
           />
         )}
-        {searchTodos.length && <CreateTodoButton advice="Add To-do" />}
-
-        {searchTodos.map((todo, index) => (
+        onEmptySearchResults={(searchText) => (
+          <>
+            <CreateTodoButton
+              advice={`add To-do with ${searchText}`}
+              openModal={openModal}
+              setOpenModal={setOpenModal}
+            />
+            <EmptySearchValue searchValue={searchText} />
+          </>
+        )}
+        onThereIsTodo={() => (
+          <CreateTodoButton
+            advice="Add To-do"
+            openModal={openModal}
+            setOpenModal={setOpenModal}
+          />
+        )}
+        render={(todo, index) => (
           <Item
             index={index}
             key={todo.text}
@@ -70,8 +95,8 @@ export default function App() {
             onComplete={() => completeOrUncompleteTodo(todo.text)}
             onDelete={() => deleteTodo(todo.text)}
           />
-        ))}
-      </ListItems>
+        )}
+      />
 
       <AnimatePresence>
         {!!openModal && (

@@ -1,6 +1,7 @@
 import React from 'react';
 
 export default function useLocalStorage(itemName, initialValue) {
+  const [sync, setSync] = React.useState(true);
   const [error, setError] = React.useState(false);
   const [loading, setLoading] = React.useState(true);
   const [item, setItem] = React.useState(initialValue);
@@ -20,11 +21,12 @@ export default function useLocalStorage(itemName, initialValue) {
 
         setItem(parsedItem);
         setLoading(false);
+        setSync(true);
       } catch (Error) {
         setError(Error);
       }
-    }, 300);
-  }, []);
+    }, 800);
+  }, [sync]);
 
   function saveItem(newTodos) {
     const stringifyTodos = JSON.stringify(newTodos);
@@ -32,10 +34,16 @@ export default function useLocalStorage(itemName, initialValue) {
     setItem(newTodos);
   }
 
+  function syncItems() {
+    setLoading(true);
+    setSync(false);
+  }
+
   return {
     item,
     saveItem,
     loading,
     error,
+    syncItems,
   };
 }

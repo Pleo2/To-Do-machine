@@ -11,6 +11,7 @@ export default function useTodo() {
   const {
     item: todos,
     saveItem: saveTodos,
+    syncItems: syncTodos,
     loading,
     error,
   } = useLocalStorage('TODOS_V2', []);
@@ -57,14 +58,15 @@ export default function useTodo() {
     completedTodos,
     totalTodos,
     searchValue,
-    setSearchValue,
     searchTodos,
-    completeOrUncompleteTodo,
-    deleteTodo,
     loading,
     error,
     openModal,
+    setSearchValue,
+    completeOrUncompleteTodo,
+    deleteTodo,
     setOpenModal,
     addTodo,
+    syncTodos,
   };
 }
