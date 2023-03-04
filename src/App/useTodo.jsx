@@ -1,9 +1,4 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/jsx-no-constructed-context-values */
-/* eslint-disable react/jsx-filename-extension */
-// eslint-disable-next-line no-unused-vars
-import React, { useState } from 'react';
+import { useState } from 'react';
 import useLocalStorage from './customsHooks/useLocalStorage';
 import useSearchValue from './customsHooks/useSearchValue';
 
@@ -54,19 +49,27 @@ export default function useTodo() {
     saveTodos(newTodos);
   };
 
-  return {
-    completedTodos,
+  const states = {
     totalTodos,
     searchValue,
     searchTodos,
     loading,
     error,
     openModal,
+    completedTodos,
+  };
+
+  const setStates = {
     setSearchValue,
     completeOrUncompleteTodo,
     deleteTodo,
     setOpenModal,
     addTodo,
     syncTodos,
+  };
+
+  return {
+    states,
+    setStates,
   };
 }

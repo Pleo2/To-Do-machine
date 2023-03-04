@@ -1,7 +1,5 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 
 export default function EmptySearchValue({ searchValue }) {
@@ -18,7 +16,11 @@ export default function EmptySearchValue({ searchValue }) {
         marginTop: '1rem',
       }}
     >
-      no task has been found that contains: {searchValue}
+      {`no task has been found that contains: ${searchValue}`}
     </motion.p>
   );
 }
+
+EmptySearchValue.propTypes = {
+  searchValue: PropTypes.string.isRequired,
+};

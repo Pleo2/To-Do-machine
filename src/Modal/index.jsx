@@ -1,7 +1,4 @@
-/* eslint-disable jsx-a11y/no-autofocus */
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable no-unused-vars */
-import React, { useContext } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { motion } from 'framer-motion';
 import './Modal.css';
@@ -52,6 +49,7 @@ export default function Modal({
           <h3>{title}</h3>
           <form onSubmit={onAddsubmit}>
             <textarea
+              // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
               placeholder="Write your to-do..."
               value={newTodoValue}

@@ -1,12 +1,9 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import PlusSVG from '../Icons/Plus';
 import './CreateButton.css';
 
-// eslint-disable-next-line react/prop-types
 export default function CreateTodoButton({ advice, openModal, setOpenModal }) {
   const onClickButton = () => {
     setOpenModal(!openModal);
@@ -30,3 +27,9 @@ export default function CreateTodoButton({ advice, openModal, setOpenModal }) {
     </motion.div>
   );
 }
+
+CreateTodoButton.propTypes = {
+  advice: PropTypes.string.isRequired,
+  openModal: PropTypes.func.isRequired,
+  setOpenModal: PropTypes.func.isRequired,
+};

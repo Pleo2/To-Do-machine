@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
 import useTodo from './useTodo';
@@ -14,24 +13,27 @@ import LoadingTodo from '../LoadingTodo';
 import Item from '../Item';
 import Modal from '../Modal';
 import EmptySearchValue from '../EmptySearchValue';
-import { ChangeAlertWithStorageListener } from '../ChangeAlert.js';
+import ChangeAlertWithStorageListener from '../ChangeAlert/index';
 
 export default function App() {
+  const { states, setStates } = useTodo();
   const {
-    error,
-    loading,
-    searchTodos,
+    totalTodos,
     searchValue,
+    searchTodos,
+    loading,
+    error,
+    openModal,
+    completedTodos,
+  } = states;
+  const {
     setSearchValue,
     completeOrUncompleteTodo,
     deleteTodo,
-    openModal,
     setOpenModal,
-    completedTodos,
-    totalTodos,
     addTodo,
     syncTodos,
-  } = useTodo();
+  } = setStates;
 
   return (
     <>

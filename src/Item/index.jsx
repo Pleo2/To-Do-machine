@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import CircleSVG from '../Icons/Circle';
 import CheckCircleSVG from '../Icons/Check-circle';
@@ -73,3 +72,12 @@ export default function Item({
     </motion.li>
   );
 }
+
+Item.propTypes = {
+  completed: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
+  index: PropTypes.number.isRequired,
+  text: PropTypes.string.isRequired,
+  onComplete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
+};

@@ -1,6 +1,5 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import * as Label from '@radix-ui/react-label';
 import './SearchInput.css';
@@ -41,3 +40,8 @@ export default function SearchInput({ setSearchValue, loading }) {
     </motion.div>
   );
 }
+
+SearchInput.propTypes = {
+  setSearchValue: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+};

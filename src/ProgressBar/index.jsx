@@ -1,17 +1,10 @@
-/* eslint-disable react/jsx-filename-extension */
-/* eslint-disable react/prop-types */
 import React from 'react';
 import './ProgressBar.css';
 import * as Progress from '@radix-ui/react-progress';
-
-// Utils
-const calPorcentaje = (t, c) => {
-  const P = (100 / t) * c;
-  return Math.round(P);
-};
+import PropTypes from 'prop-types';
 
 export default function ProgressBar({ completedTodos, totalTodos, loading }) {
-  const progressPorcentaje = calPorcentaje(totalTodos, completedTodos);
+  const progressPorcentaje = Math.round((100 / totalTodos) * completedTodos);
 
   const [progress, setProgress] = React.useState(0);
 
@@ -32,3 +25,9 @@ export default function ProgressBar({ completedTodos, totalTodos, loading }) {
     </Progress.Root>
   );
 }
+
+ProgressBar.propTypes = {
+  completedTodos: PropTypes.number.isRequired,
+  totalTodos: PropTypes.number.isRequired,
+  loading: PropTypes.bool.isRequired,
+};

@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable import/prefer-default-export */
-/* eslint-disable react/jsx-filename-extension */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import withStorageListener from './withStorageListener';
 import './ChangeAlert.css';
@@ -24,11 +23,7 @@ function ChangeAlert({ show, toggleShow }) {
         }}
         exit={{ opacity: 0, scale: 0 }}
       >
-        <motion.p
-          className="p--changes-alert"
-        >
-          Changes are available
-        </motion.p>
+        <motion.p className="p--changes-alert">Changes are available</motion.p>
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.85 }}
@@ -45,4 +40,11 @@ function ChangeAlert({ show, toggleShow }) {
   return null;
 }
 
-export const ChangeAlertWithStorageListener = withStorageListener(ChangeAlert);
+export default function ChangeAlertWithStorageListener() {
+  return withStorageListener(ChangeAlert);
+}
+
+ChangeAlert.prototype = {
+  show: PropTypes.bool.isRequired,
+  toggleShow: PropTypes.func.isRequired,
+};
