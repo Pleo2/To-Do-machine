@@ -32,6 +32,7 @@ export default function ListItems({
       {(totalTodos !== 0 && searchTodos?.length === 0) && onEmptySearchResults(searchValue)}
 
       {!loading && searchTodos?.map((todo, index) => render(todo, index))}
+
       <ul>
         <AnimatePresence>{children}</AnimatePresence>
       </ul>
