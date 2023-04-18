@@ -2,18 +2,18 @@
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
 import useTodo from './useTodo';
-import Header from '../Header';
-import TodoCounter from '../Counter';
-import ProgressBar from '../ProgressBar';
-import SearchInput from '../SearchInput';
-import ListItems from '../ListItems';
-import CreateTodoButton from '../CreateBtn';
-import ErrorTodo from '../ErrorTodo';
-import LoadingTodo from '../LoadingTodo';
-import Item from '../Item';
-import Modal from '../Modal';
-import EmptySearchValue from '../EmptySearchValue';
-import ChangeAlertWithStorageListener from '../ChangeAlert/index';
+import Header from './components/Header';
+import TodoCounter from './components/Counter';
+import ProgressBar from './components/ProgressBar';
+import SearchInput from './components/SearchInput';
+import ListItems from './components/ListItems';
+import CreateTodoButton from './components/CreateBtn';
+import ErrorTodo from './components/ErrorTodo';
+import LoadingTodo from './components/LoadingTodo';
+import Item from './components/Item';
+import CreateTodoModal from './modals/CreateTodoModal';
+import EmptySearchValue from './components/EmptySearchValue';
+import ChangeAlertWithStorageListener from './components/ChangeAlert';
 
 export default function App() {
   const { states, setStates } = useTodo();
@@ -44,6 +44,7 @@ export default function App() {
         totalTodos={totalTodos}
         loading={loading}
       />
+
       <ProgressBar
         completedTodos={completedTodos}
         totalTodos={totalTodos}
@@ -102,7 +103,7 @@ export default function App() {
 
       <AnimatePresence>
         {!!openModal && (
-          <Modal
+          <CreateTodoModal
             title="Create a new To-do"
             leftBtn="cancel"
             rightBt2="add"
