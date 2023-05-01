@@ -1,0 +1,16 @@
+.TodoList--container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+ul{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+  list-style: none;
+  max-width: 320px;
+  padding: 0;
+}

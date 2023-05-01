@@ -1,0 +1,66 @@
+@import '/src/global.css';
+
+.container-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  padding-inline: 15px;
+  width: 250px;
+  max-width: 300px;
+  height: auto;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  margin-top: 1rem;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -2px rgba(0,0,0,.1) ;
+}
+
+.circleSVG svg, .trashSVG svg{
+  transition: var(--transition-time);
+}
+
+.trashSVG svg {
+  width: 16px;
+  height: 16px;
+  color: var(--accents-3);
+}
+.trashSVG svg:hover {
+  color: rgb(218, 75, 75);
+  cursor: pointer;
+}
+
+.circleSVG svg {
+  width: 20px;
+  height: 20px;
+  color: var(--accents-2);
+}
+
+.circleSVG svg:hover {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  color: var(--accents-5);
+}
+
+p {
+  color: var(--accents-4);
+  width: 200px;
+  font-size: small;
+  padding: 4px;
+  text-align: left;
+}
+
+.icon-check--icon {
+  text-decoration: line-through;
+}
+
+.icon-check--icon .circleSVG svg {
+  color: #1d9bf0;
+  transition: var(--transition-time);
+}
+
+.icon-check--icon .circleSVG svg:hover {
+  cursor: pointer;
+  color: rgb(218, 75, 75);
+}

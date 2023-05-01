@@ -1,54 +1,54 @@
 import { useState } from 'react';
 import useLocalStorage from './customsHooks/useLocalStorage';
 import useSearchValue from './customsHooks/useSearchValue';
+import useSyncTodos from './customsHooks/useSyncTodos'
 
 export default function useTodo() {
-  const {
-    item: todos,
-    saveItem: saveTodos,
-    syncItems: syncTodos,
-    loading,
-    error,
-  } = useLocalStorage('TODOS_V2', []);
+  const { item , saveItem, syncItems, loading, error } = useLocalStorage(
+    'TODOS_V2',
+    [],
+  )
 
   const {
     searchValue,
-    searchItem: searchTodos,
-    setSearchItem: setSearchValue,
-  } = useSearchValue(todos);
+    searchTodos,
+    setSearchValue
+  } = useSearchValue(item)
   // Pararmetros para Counter and ProgressBar
 
-  const [openModal, setOpenModal] = useState(false);
+  const { showAlert, toggleShow } = useSyncTodos(syncItems)
 
-  const completedTodos = todos.filter((todo) => !!todo.completed).length;
-  const totalTodos = todos.length;
+  const [openModal, setOpenModal] = useState(false)
 
-  const addTodo = (text) => {
-    const newTodos = [...todos];
+  const completedTodos = item.filter(todo => !!todo.completed).length
+  const totalTodos = item.length
+
+  const addTodo = text => {
+    const newTodos = [...item]
     newTodos.push({
       completed: false,
       text,
-    });
-    saveTodos(newTodos);
-  };
+    })
+    saveItem(newTodos)
+  }
 
-  const completeOrUncompleteTodo = (text) => {
-    const indexTodo = todos.findIndex((todo) => text === todo.text);
-    const newTodos = [...todos];
+  const completeOrUncompleteTodo = text => {
+    const indexTodo = item.findIndex(todo => text === todo.text)
+    const newTodos = [...item]
     // eslint-disable-next-line no-unused-expressions
     newTodos[indexTodo].completed === true
       ? (newTodos[indexTodo].completed = false)
-      : (newTodos[indexTodo].completed = true);
-    saveTodos(newTodos);
-  };
+      : (newTodos[indexTodo].completed = true)
+    saveItem(newTodos)
+  }
 
-  const deleteTodo = (text) => {
-    const indexTodo = todos.findIndex((todo) => text === todo.text);
-    const newTodos = [...todos];
-    newTodos.splice(indexTodo, 1);
-    saveTodos(newTodos);
-  };
-
+  const deleteTodo = text => {
+    const indexTodo = item.findIndex(todo => text === todo.text)
+    const newTodos = [...item]
+    newTodos.splice(indexTodo, 1)
+    saveItem(newTodos)
+  }
+  
   const states = {
     totalTodos,
     searchValue,
@@ -57,7 +57,8 @@ export default function useTodo() {
     error,
     openModal,
     completedTodos,
-  };
+    showAlert,
+  }
 
   const setStates = {
     setSearchValue,
@@ -65,8 +66,8 @@ export default function useTodo() {
     deleteTodo,
     setOpenModal,
     addTodo,
-    syncTodos,
-  };
+    toggleShow,
+  }
 
   return {
     states,

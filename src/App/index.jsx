@@ -3,17 +3,12 @@ import React from 'react';
 import { AnimatePresence } from 'framer-motion';
 import useTodo from './useTodo';
 import Header from './components/Header';
-import TodoCounter from './components/Counter';
+import Counter from './components/Counter';
 import ProgressBar from './components/ProgressBar';
 import SearchInput from './components/SearchInput';
 import ListItems from './components/ListItems';
-import CreateTodoButton from './components/CreateBtn';
-import ErrorTodo from './components/ErrorTodo';
-import LoadingTodo from './components/LoadingTodo';
-import Item from './components/Item';
 import CreateTodoModal from './modals/CreateTodoModal';
-import EmptySearchValue from './components/EmptySearchValue';
-import ChangeAlertWithStorageListener from './components/ChangeAlert';
+import ChangeAlert from './components/ChangeAlert';
 
 export default function App() {
   const { states, setStates } = useTodo();
@@ -25,6 +20,7 @@ export default function App() {
     error,
     openModal,
     completedTodos,
+    showAlert,
   } = states;
   const {
     setSearchValue,
@@ -32,14 +28,14 @@ export default function App() {
     deleteTodo,
     setOpenModal,
     addTodo,
-    syncTodos,
+    toggleShow,
   } = setStates;
 
   return (
     <>
       <Header />
 
-      <TodoCounter
+      <Counter
         completedTodos={completedTodos}
         totalTodos={totalTodos}
         loading={loading}
@@ -56,49 +52,19 @@ export default function App() {
         loading={loading}
       />
 
-      <ChangeAlertWithStorageListener syncTodos={syncTodos} />
+      {showAlert && <ChangeAlert toggleShow={toggleShow} />}
+      
+      
       <ListItems
         error={error}
         loading={loading}
         searchTodos={searchTodos}
         totalTodos={totalTodos}
         searchValue={searchValue}
-        onError={() => <ErrorTodo />}
-        onLoading={() => <LoadingTodo />}
-        onEmptyTodo={() => (
-          <CreateTodoButton
-            advice="Create First To-do"
-            openModal={openModal}
-            setOpenModal={setOpenModal}
-          />
-        )}
-        onEmptySearchResults={(searchText) => (
-          <>
-            <CreateTodoButton
-              advice={`add To-do with ${searchText}`}
-              openModal={openModal}
-              setOpenModal={setOpenModal}
-            />
-            <EmptySearchValue searchValue={searchText} />
-          </>
-        )}
-        onThereIsTodo={() => (
-          <CreateTodoButton
-            advice="Add To-do"
-            openModal={openModal}
-            setOpenModal={setOpenModal}
-          />
-        )}
-        render={(todo, index) => (
-          <Item
-            index={index}
-            key={todo.text}
-            text={todo.text}
-            completed={todo.completed}
-            onComplete={() => completeOrUncompleteTodo(todo.text)}
-            onDelete={() => deleteTodo(todo.text)}
-          />
-        )}
+        onComplete={completeOrUncompleteTodo}
+        openModal={openModal}
+        onDelete={deleteTodo}
+        setOpenModal={setOpenModal}
       />
 
       <AnimatePresence>
@@ -107,7 +73,6 @@ export default function App() {
             title="Create a new To-do"
             leftBtn="cancel"
             rightBt2="add"
-            openModal={openModal}
             setOpenModal={setOpenModal}
             addTodo={addTodo}
           />

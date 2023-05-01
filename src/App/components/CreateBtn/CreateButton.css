@@ -1,0 +1,35 @@
+@import '/src/global.css';
+
+.button--add-todo {
+  margin-top: 1rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-inline: 0.75rem;
+  height: 30px;
+  width: max-content;
+
+  border-radius: 0.75rem;
+  box-shadow: 00 0 0 1px rgb(209 213 219); 
+  border: none;
+  background-color: transparent;
+  padding-inline: 10px;
+  padding-block: 3px;
+
+  transition: var(--transition-time);
+}
+
+.button--add-todo:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0 1px var(--accents-6);
+}
+
+.button--add-todo svg {
+  padding-right: 2px;
+  color: var(--accents-3);
+}
+
+.button--add-todo span {
+  color: var(--accents-5);
+}
