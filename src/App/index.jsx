@@ -2,7 +2,7 @@
 import React from 'react';
 import { AnimatePresence } from 'framer-motion';
 import useTodo from './useTodo';
-import Header from './components/Header';
+import Header from './components/Header'
 import Counter from './components/Counter';
 import ProgressBar from './components/ProgressBar';
 import SearchInput from './components/SearchInput';
@@ -34,7 +34,6 @@ export default function App() {
   return (
     <>
       <Header />
-
       <Counter
         completedTodos={completedTodos}
         totalTodos={totalTodos}
